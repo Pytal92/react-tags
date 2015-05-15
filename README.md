@@ -1,5 +1,7 @@
 ### React-Tags
 
+[![NPM](https://nodei.co/npm/react-tag-input.png?downloads=true)](https://www.npmjs.com/package/react-tag-input)
+
 React tags is a simple tagging component ready to drop in your React projects. The component is inspired by GMail's *To* field in the compose window. 
 
 ### Features
@@ -35,7 +37,7 @@ var App = React.createClass({
     getInitialState: function() {
         return {
             tags: [ {id: 1, text: "Apples"} ],
-            suggestions: ["Banana", "Mango", "Pear", "Apricot"];
+            suggestions: ["Banana", "Mango", "Pear", "Apricot"]
         }
     },
     handleDelete: function(i) {
@@ -67,7 +69,7 @@ var App = React.createClass({
         return (
             <div>
                 <ReactTags tags={tags} 
-                    suggestions={Countries}
+                    suggestions={suggestions}
                     handleDelete={this.handleDelete}
                     handleAddition={this.handleAddition}
                     handleDrag={this.handleDrag} />
@@ -84,6 +86,7 @@ React.render(<App />, document.getElementById('app'));
 
 - [`tags`](#tagsOption)
 - [`suggestions`](#suggestionsOption)
+- [`placeholder`](#placeholderOption)
 - [`handleAddition`](#handleAdditionOption)
 - [`handleDelete`](#handleDeleteOption)
 - [`handleDrag`](#handleDragOption)
@@ -102,6 +105,14 @@ An array of suggestions that are used as basis for showing suggestions. At the m
 
 ```js
 var suggestions = ["mango", "pineapple", "orange", "pear"];
+```
+
+<a name="placeholderOption"></a>
+##### placeholder (optional)
+The placeholder shown for the input. Defaults to 'Add new tag'.
+
+```
+var placeholder = "Add new country"
 ```
 
 <a name="handleAdditionOption"></a>
