@@ -7,32 +7,20 @@ var React = require('react');
 
 var ItemTypes = { TAG: 'tag' };
 
-var styles = {
-    tag: {
-        border: '1px solid #ddd',
-        background: '#eee',
-        fontSize: 12,
-        display: 'inline-block',
-        padding: 5,
-        margin: '0 5px',
-        cursor: 'move',
-        borderRadius: 2
-    },
-    remove: {
-        color: '#aaa',
-        marginLeft: 5,
-        cursor: 'pointer'
-    }
-};
-
 var Tag = React.createClass({
     displayName: 'Tag',
 
     mixins: [ReactDND.DragDropMixin],
     propTypes: {
+        labelField: React.PropTypes.string,
         onDelete: React.PropTypes.func.isRequired,
         tag: React.PropTypes.object.isRequired,
         moveTag: React.PropTypes.func.isRequired
+    },
+    getDefaultProps: function getDefaultProps() {
+        return {
+            labelField: 'text'
+        };
     },
     statics: {
         configureDragDrop: function configureDragDrop(register) {
@@ -55,16 +43,15 @@ var Tag = React.createClass({
         }
     },
     render: function render() {
+        var label = this.props.tag[this.props.labelField];
         return React.createElement(
             'span',
             _extends({ className: 'ReactTags__tag'
-            }, this.dragSourceFor(ItemTypes.TAG), this.dropTargetFor(ItemTypes.TAG), {
-                style: styles.tag }),
-            this.props.tag.text,
+            }, this.dragSourceFor(ItemTypes.TAG), this.dropTargetFor(ItemTypes.TAG)),
+            label,
             React.createElement(
                 'a',
                 { className: 'ReactTags__remove',
-                    style: styles.remove,
                     onClick: this.props.onDelete },
                 'x'
             )

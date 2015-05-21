@@ -87,6 +87,7 @@ React.render(<App />, document.getElementById('app'));
 - [`tags`](#tagsOption)
 - [`suggestions`](#suggestionsOption)
 - [`placeholder`](#placeholderOption)
+- [`labelField`](#labelFieldOption)
 - [`handleAddition`](#handleAdditionOption)
 - [`handleDelete`](#handleDeleteOption)
 - [`handleDrag`](#handleDragOption)
@@ -109,11 +110,24 @@ var suggestions = ["mango", "pineapple", "orange", "pear"];
 
 <a name="placeholderOption"></a>
 ##### placeholder (optional)
-The placeholder shown for the input. Defaults to 'Add new tag'.
+The placeholder shown for the input. Defaults to `Add new tag`.
 
 ```
 var placeholder = "Add new country"
 ```
+
+<a name="labelFieldOption"></a>
+##### labelField (optional)
+Provide an alternative `label` property for the tags. Defaults to `text`.
+
+```
+<ReactTags tags={tags} 
+    suggestions={}
+    labelField={'name'}
+    handleDrag={} />
+```
+This is useful if your data uses the `text` property for something else.
+
 
 <a name="handleAdditionOption"></a>
 ##### handleAddition (required)
@@ -144,6 +158,18 @@ function(tag, currPos, newPos) {
     // remove tag from currPos and add in newPos
 }
 ```
+
+### Styling
+`<ReactTags>` does not come up with any styles. However, it is very easy to customize the look of the component the way you want it. The component provides the following classes with which you can style - 
+
+- `ReactTags__tags`
+- `ReactTags__tagInput`
+- `ReactTags__selected`
+- `ReactTags__selected ReactTags__tag`
+- `ReactTags__selected ReactTags__remove`
+- `ReactTags__suggestions`
+
+An example can be found in `/example/reactTags.css`.
 
 ### Dev
 The component is written in ES6 and uses [Webpack](http://webpack.github.io/) as its build tool. 
