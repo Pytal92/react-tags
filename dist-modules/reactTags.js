@@ -21,7 +21,9 @@ var ReactTags = React.createClass({
         tags: React.PropTypes.array,
         placeholder: React.PropTypes.string,
         labelField: React.PropTypes.string,
+        linkElement: React.PropTypes.string,
         suggestions: React.PropTypes.array,
+        handleLink: React.PropTypes.func,
         handleDelete: React.PropTypes.func.isRequired,
         handleAddition: React.PropTypes.func.isRequired,
         handleDrag: React.PropTypes.func.isRequired
@@ -165,7 +167,9 @@ var ReactTags = React.createClass({
             return React.createElement(Tag, { key: i,
                 tag: tag,
                 labelField: this.props.labelField,
+                linkElement: this.props.linkElement,
                 onDelete: this.handleDelete.bind(this, i),
+                onLinkClick: this.props.handleLink,
                 moveTag: this.moveTag });
         }).bind(this));
 
@@ -180,11 +184,6 @@ var ReactTags = React.createClass({
             { className: 'ReactTags__tags' },
             React.createElement(
                 'div',
-                { className: 'ReactTags__selected' },
-                tagItems
-            ),
-            React.createElement(
-                'div',
                 { className: 'ReactTags__tagInput' },
                 React.createElement('input', { ref: 'input',
                     type: 'text',
@@ -196,6 +195,11 @@ var ReactTags = React.createClass({
                     selectedIndex: selectedIndex,
                     handleClick: this.handleSuggestionClick,
                     handleHover: this.handleSuggestionHover })
+            ),
+            React.createElement(
+                'div',
+                { className: 'ReactTags__selected' },
+                tagItems
             )
         );
     }

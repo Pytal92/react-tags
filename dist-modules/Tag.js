@@ -13,13 +13,16 @@ var Tag = React.createClass({
     mixins: [ReactDND.DragDropMixin],
     propTypes: {
         labelField: React.PropTypes.string,
+        linkElement: React.PropTypes.string,
+        onLinkClick: React.PropTypes.func,
         onDelete: React.PropTypes.func.isRequired,
         tag: React.PropTypes.object.isRequired,
         moveTag: React.PropTypes.func.isRequired
     },
     getDefaultProps: function getDefaultProps() {
         return {
-            labelField: 'text'
+            labelField: 'text',
+            linkElement: 'link'
         };
     },
     statics: {
@@ -44,11 +47,22 @@ var Tag = React.createClass({
     },
     render: function render() {
         var label = this.props.tag[this.props.labelField];
+        var link = this.props.tag[this.props.linkElement];
+        var output = label;
+
+        if (link) {
+            output = React.createElement(
+                'a',
+                { href: link, onClick: this.props.onLinkClick.bind(null, label) },
+                label
+            );
+        }
+
         return React.createElement(
             'span',
             _extends({ className: 'ReactTags__tag'
             }, this.dragSourceFor(ItemTypes.TAG), this.dropTargetFor(ItemTypes.TAG)),
-            label,
+            output,
             React.createElement(
                 'a',
                 { className: 'ReactTags__remove',
